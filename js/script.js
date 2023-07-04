@@ -21,7 +21,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			});
 			if(response.ok){
         let result = await response.json();
-				alert(result.message);
+				// alert(result.message);
+				alert("Регистрация прошла успешно");
 				formPreview.innerHTML = '';
 				form.reset();
 				form.classList.remove('_sending');  //после отправки формы отбираем класс _sending
@@ -29,12 +30,19 @@ document.addEventListener('DOMContentLoaded', function(){
 				alert('Ошибка');
 			}
 		} else {
-			buttonErrorAnimate();
-			setTimeout(alert("Заполните обязательные поля"), 0);		
-		
-	     }
+			setTimeout(buttonErrorAnimate, 0);
+			alert("Заполните обязательные поля");
+			setTimeout(buttonErrorAnimateDelete, 2000);
+		 }
 	}
-
+function buttonErrorAnimate(){
+	const button = document.querySelector(".form__button")
+	button.classList.add('error-animate');
+	}
+function buttonErrorAnimateDelete(){
+	const button = document.querySelector(".form__button")
+	button.classList.remove('error-animate');
+	}
 	function formValidate(form) {
    let error = 0;
    let formReq = document.querySelectorAll('._req');  // класс ._req(required-требовать, проверять) добавляем полям, которые необходимо проверять.
